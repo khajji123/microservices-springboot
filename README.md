@@ -22,9 +22,9 @@ This project is created using the following technologies:
 1. Java 8
 2. Spring Boot in cloud-native development:
 	
-	+ **Spring Cloud Netflix Eureka** – Registration and Discovery service for all microservices
-	+ **Spring Cloud Netflix Zuul** – API Gateway service that provides dynamic routing, and load balancer
-	+ **Spring Cloud Netflix Feign** – Declarative REST client
+	+ **Spring Cloud Netflix Eureka** ï¿½ Registration and Discovery service for all microservices
+	+ **Spring Cloud Netflix Zuul** ï¿½ API Gateway service that provides dynamic routing, and load balancer
+	+ **Spring Cloud Netflix Feign** ï¿½ Declarative REST client
 	
 3. Spring Boot in microservices development:
 	
@@ -66,7 +66,7 @@ To run this project, install it locally as follow:
 1. **Clone the application**
 
 	```bash
-	git clone https://github.com/SayedBaladoh/Microservices-Sample-using-SpringBoot-SpringCloud-Eureka-and-Zuul.git
+	git clone https://github.com/jerbi/Microservices-Sample-using-SpringBoot-SpringCloud-Eureka-and-Zuul.git
 	```
 
 2. **Change the servers' port for the applications as per you want**
@@ -149,7 +149,7 @@ To run this project, install it locally as follow:
 	mvn spring-boot:run
 	```
 	
-	The server will start on port `8080` by default, So once you have successfully started application you'll be able to visit API gateway under address `http://localhost:8080`.
+	The server will start on port `9080` by default, So once you have successfully started application you'll be able to visit API gateway under address `http://localhost:9080`.
 	
 	If you changed the port in `src/main/resources/application.yml` file, use your custom port `http://localhost:port`.
 	
@@ -173,9 +173,9 @@ To run this project, install it locally as follow:
 
 	You can run more instances of the microservices (User, Site, Organization):
 	
-	* Using eclipse just edit run command of your application (Run configurations…) and add VM parameter `-DPORT=…` or `-Dserver.port=…`.
+	* Using eclipse just edit run command of your application (Run configurationsï¿½) and add VM parameter `-DPORT=ï¿½` or `-Dserver.port=ï¿½`.
 	
-	* Or using the `-Dserver.port=…` argument with the command: `java -jar target/service_name.jar -Dserver.port=…`
+	* Or using the `-Dserver.port=ï¿½` argument with the command: `java -jar target/service_name.jar -Dserver.port=ï¿½`
 
 	```bash
 	java -jar target/service_name-0.0.1-SNAPSHOT.jar -Dserver.port=8085
@@ -193,20 +193,20 @@ To access the applications use the following endpoints
 	
 	![Eureka Discovery Dashboard](EurekaDashboard.png)
 	
-	Now take a look on Eureka monitoring console: We’ve got one instance of Site and Organization microservices running on default ports (8082, 8083) and two instances of user microservice on (8081, 8085) ports registered on discovery server. 
+	Now take a look on Eureka monitoring console: Weï¿½ve got one instance of Site and Organization microservices running on default ports (8082, 8083) and two instances of user microservice on (8081, 8085) ports registered on discovery server. 
 
 * **API Gateway and Microservices**
 		
-	+ View info about `API Gateway` service `http://localhost:8080/actuator/info`
+	+ View info about `API Gateway` service `http://localhost:9080/actuator/info`
 	
-	+ Check Health for `API Gateway` service `http://localhost:8080/actuator/health`
+	+ Check Health for `API Gateway` service `http://localhost:9080/actuator/health`
 		
-	Zuul is configured to be available under its default port 8080 and it forwards requests:
+	Zuul is configured to be available under its default port 9080 and it forwards requests:
 	* From `/api/users/` path to `user-service` 
 	* From `/api/sites/` path to `site-service`
 	* From `/api/organizations/` path to `organization-service`
 	
-	 When URL `http://localhost:8080/api/users/1` is called several times the Zuul make load balanced between two instances of each user microservice instances.
+	 When URL `http://localhost:9080/api/users/1` is called several times the Zuul make load balanced between two instances of each user microservice instances.
 	 Also when we shut down one of microservice instance we can take a look that it is unregistered from Eureka server dashboard.	
 
 ## Sample Requests
@@ -217,7 +217,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 	
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/users/actuator/info' \
+	'http://localhost:9080/api/users/actuator/info' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -226,7 +226,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/users/actuator/health' \
+	'http://localhost:9080/api/users/actuator/health' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -235,7 +235,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 	
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/users' \
+	'http://localhost:9080/api/users' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -244,7 +244,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/users/1' \
+	'http://localhost:9080/api/users/1' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -253,7 +253,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/users/site/3' \
+	'http://localhost:9080/api/users/site/3' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -262,7 +262,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/users/organization/1' \
+	'http://localhost:9080/api/users/organization/1' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -273,7 +273,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 	
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/sites/actuator/info' \
+	'http://localhost:9080/api/sites/actuator/info' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -282,7 +282,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/sites/actuator/health' \
+	'http://localhost:9080/api/sites/actuator/health' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -291,7 +291,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 	
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/sites' \
+	'http://localhost:9080/api/sites' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -300,7 +300,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/sites/1' \
+	'http://localhost:9080/api/sites/1' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -309,7 +309,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/sites/organization/1' \
+	'http://localhost:9080/api/sites/organization/1' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -318,7 +318,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/sites/organization/1/with-users' \
+	'http://localhost:9080/api/sites/organization/1/with-users' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -329,7 +329,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 	
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations/actuator/info' \
+	'http://localhost:9080/api/organizations/actuator/info' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -338,7 +338,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations/actuator/health' \
+	'http://localhost:9080/api/organizations/actuator/health' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -347,7 +347,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 	
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations' \
+	'http://localhost:9080/api/organizations' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -356,7 +356,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations/1' \
+	'http://localhost:9080/api/organizations/1' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -365,7 +365,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations/1/with-sites' \
+	'http://localhost:9080/api/organizations/1/with-sites' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -373,7 +373,7 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations/1/with-sites-with-users' \
+	'http://localhost:9080/api/organizations/1/with-sites-with-users' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
@@ -382,21 +382,9 @@ CURL GET command samples for different (User, Site, Organization) microservices 
 
 	```bash
 	curl -X GET \
-	'http://localhost:8080/api/organizations/1/with-users' \
+	'http://localhost:9080/api/organizations/1/with-users' \
 	  -H 'accept: */*' \
 	  -H 'cache-control: no-cache'
 	```
 
-## About me
 
-I am Sayed Baladoh - Phd. Senior Software Engineer. I like software development. You can contact me via:
-
-* [LinkedIn+](https://www.linkedin.com/in/sayed-baladoh-227aa66b/)
-* [Mail](mailto:sayedbaladoh@yahoo.com)
-* [Phone +20 1004337924](tel:+201004337924)
-
-_**Any improvement or comment about the project is always welcome! As well as others shared their code publicly I want to share mine! Thanks!**_
-
-## Acknowledgments
-
-Thanks for reading. Share it with someone you think it might be helpful.
