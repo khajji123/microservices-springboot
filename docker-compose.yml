@@ -1,0 +1,71 @@
+version: '3'
+services:
+  eureka-server:
+    image: eureka-server
+    build:
+      context: ./discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+
+  config-server:
+    image: config-server
+    build:
+      context: ./config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+    ports:
+      - "8888:8888"
+    networks:
+      - microservices-network
+    depends_on:
+      - eureka-server
+
+  gateway-service:
+    image: gateway-service
+    build:
+      context: ./gateway-service
+    ports:
+      - "9080:9080"
+    networks:
+      - microservices-network
+    depends_on:
+      - config-server
+
+  organization-service:
+    image: organization-service
+    build:
+      context: ./organization-service
+    ports:
+      - "8083:8083"
+    networks:
+      - microservices-network
+    depends_on:
+      - config-server
+
+  site-service:
+    image: site-service
+    build:
+      context: ./site-service
+    ports:
+      - "8082:8082"
+    networks:
+      - microservices-network
+    depends_on:
+      - config-server
+
+  user-service:
+    image: user-service
+    build:
+      context: ./user-service
+    ports:
+      - "8081:8081"
+    networks:
+      - microservices-network
+    depends_on:
+      - config-server
+
+networks:
+  microservices-network:
+    driver: bridge
