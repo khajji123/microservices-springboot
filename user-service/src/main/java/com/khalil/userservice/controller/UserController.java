@@ -19,7 +19,7 @@ import com.khalil.userservice.model.User;
 /**
  * Recipients Controller
  * 
- * @author SayedBaladoh
+ * @author Khalil
  *
  */
 @RestController
