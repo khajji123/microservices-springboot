@@ -1,7 +1,6 @@
-version: '3'
+version: '3.9'
 services:
   eureka-server:
-    image: eureka-server
     build:
       context: ./discovery-service
     ports:
@@ -10,9 +9,8 @@ services:
       - microservices-network
 
   config-server:
-    image: config-server
     build:
-      context: ./config-server
+      context: ./config-service
     environment:
       - SPRING_PROFILES_ACTIVE=native
     ports:
@@ -23,7 +21,6 @@ services:
       - eureka-server
 
   gateway-service:
-    image: gateway-service
     build:
       context: ./gateway-service
     ports:
@@ -34,7 +31,6 @@ services:
       - config-server
 
   organization-service:
-    image: organization-service
     build:
       context: ./organization-service
     ports:
@@ -45,7 +41,6 @@ services:
       - config-server
 
   site-service:
-    image: site-service
     build:
       context: ./site-service
     ports:
@@ -56,7 +51,6 @@ services:
       - config-server
 
   user-service:
-    image: user-service
     build:
       context: ./user-service
     ports:
