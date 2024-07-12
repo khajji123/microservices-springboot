@@ -1,27 +1,16 @@
 package com.khalil.siteservice.controller;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.khalil.siteservice.model.Site;
+import com.khalil.siteservice.service.SiteService;
+import com.khalil.siteservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.khalil.siteservice.client.UserClient;
-import com.khalil.siteservice.model.Site;
-import com.khalil.siteservice.service.SiteService;
+import java.util.List;
+import java.util.Optional;
 
-/**
- * Sites Controller
- * 
- * @author khalil
- *
- */
 @RestController
 public class SiteController {
 
@@ -29,7 +18,7 @@ public class SiteController {
 	private SiteService siteService;
 
 	@Autowired
-	private UserClient userClient;
+	private UserService userService;
 
 	@PostMapping
 	public Site add(@RequestBody Site site) {
@@ -58,7 +47,7 @@ public class SiteController {
 	@GetMapping("/organization/{organizationId}/with-users")
 	public List<Site> findByOrganizationWithUsers(@PathVariable("organizationId") Long organizationId) {
 		List<Site> sites = siteService.getByOrganizationId(organizationId);
-		sites.forEach(s -> s.setUsers(userClient.findBySiteId(s.getId())));
+		sites.forEach(s -> s.setUsers(userService.findBySiteId(s.getId())));
 		return sites;
 	}
 }

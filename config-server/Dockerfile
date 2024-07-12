@@ -1,11 +1,27 @@
-# Utiliser l'image officielle de Maven pour construire l'application
+# Utilise une image parent Maven pour la construction
 FROM maven:3.8.5-openjdk-8 AS build
+
+# Définit le répertoire de travail dans le conteneur
 WORKDIR /app
-COPY . .
+
+# Copie les fichiers pom.xml et src dans le répertoire de travail
+COPY pom.xml .
+COPY src ./src
+
+# Compile le projet
 RUN mvn clean package -DskipTests
 
-# Utiliser l'image officielle de Java 8 pour exécuter l'application
+# Utilise une image parent OpenJDK pour l'exécution
 FROM openjdk:8-jre-slim
+
+# Définit le répertoire de travail dans le conteneur
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Copie le fichier jar généré du premier conteneur vers le second conteneur
+COPY --from=build /app/target/config-server-0.0.1-SNAPSHOT.jar ./config-server.jar
+
+# Expose le port 8888
+EXPOSE 8888
+
+# Définit la commande d'exécution
+ENTRYPOINT ["java", "-jar", "./config-server.jar"]

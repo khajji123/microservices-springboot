@@ -24,6 +24,7 @@ import com.khalil.organizationservice.model.Organization;
  *
  */
 @RestController
+
 public class OrganizationController {
 
 	@Autowired
