@@ -5,7 +5,7 @@ spring:
       fail-fast: true
       server:
         git:
-          uri: https://github.com/jerbi2026/Config-repo.git
+          uri: https://github.com/khajji123/microservices-springboot.git
           clone-on-start: true
 
 eureka:
